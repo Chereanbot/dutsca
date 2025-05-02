@@ -1,0 +1,123 @@
+---
+description: about my worksopace detail info
+globs: 
+alwaysApply: false
+---
+ Superadmin Activities
+Create & manage all system actors (chairman, manager, financial head, banks)
+
+Input: Full name, email, role, login credentials
+
+Set system-wide permissions & access levels
+
+Define what each role can view/edit
+
+Initiate & schedule system backups
+
+Auto/manual backup with timestamped archive
+
+Review full audit logs
+
+Logs of all activity (logins, data changes, transactions)
+
+Change system settings
+
+Theme, security policy, rate limits, default values
+
+🧑‍💼 Manager Activities
+View member summaries
+
+Filter by department, active/inactive status
+
+Track daily transactions
+
+Overview of total deposits, withdrawals, credit requests
+
+Approve/decline pending internal operations
+
+E.g. savings goal edits, transfer complaints
+
+Schedule reports or meetings
+
+Create reminders, download summaries (PDF/Excel)
+
+💰 Financial Head Activities
+Handle deposit confirmations
+
+Verify amount, reference number, source
+
+Process withdrawal requests
+
+Review account, balance, frequency
+
+Review and approve/reject credit requests
+
+Eligibility: >12 months member, credit limit checks
+
+Oversee internal fund transfers
+
+Transfer between user accounts or to external bank
+
+Generate financial reports
+
+Summary of all income, expenses, outstanding loans
+
+🧑‍⚖️ Chairman Activities
+Approve new members
+
+Validate teacher/servant ID, school email
+
+Oversee all system activity
+
+Monitor user behavior, transactions, system health
+
+Post announcements & alerts
+
+Notify all users or selected roles
+
+Receive and respond to member reports
+
+Grievances, policy feedback
+
+Track long-term trends
+
+Membership growth, savings vs. credit demand
+
+👨‍🏫 Teachers / 👨‍🔧 Servants Activities
+Register as a new member
+
+Form includes name, school ID, department, email
+
+View dashboard with savings/credit balance
+
+Pie chart/graph view of financial health
+
+Deposit funds
+
+Choose method, enter amount, attach receipt
+
+Withdraw funds
+
+Apply withdrawal with purpose, bank details
+
+Request credit
+
+Must meet 12-month threshold; auto-check eligibility
+
+Set personal savings goals
+
+Add goal title, target amount, deadline
+
+Create or join team goals
+
+Team title, invite members, collective target
+
+Transfer funds to others
+
+Search user by email/ID, enter amount + reason
+
+View transaction history
+
+Filter by date, type, amount
+
+

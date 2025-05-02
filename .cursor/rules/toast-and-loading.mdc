@@ -1,0 +1,63 @@
+---
+description: if you wan to use on any code in my websites you have to use this toast notifications and loadings
+globs: 
+alwaysApply: false
+---
+ Loading Component Idea
+Design:
+
+Background: Light gray #f4f4f4
+
+Loader: Spinning coin (ETB symbol) or shield pulse animation 🛡️💰
+
+Text below: “Securely connecting to DUTSCA...”
+
+Color: Use #00572d (primary green) and gold #f3c300 for the loader animation
+
+Example (in code):
+
+html
+Copy
+Edit
+<div class="flex flex-col items-center justify-center h-screen bg-[#f4f4f4]">
+  <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-[#f3c300] border-solid"></div>
+  <p class="mt-4 text-[#00572d] font-semibold text-lg">Securely connecting to DUTSCA...</p>
+</div>
+🍞 Toast Notification Idea
+Style:
+
+Rounded corners, soft shadow
+
+Colors:
+
+Success: #1f9345 ✅
+
+Error: #d93025 ❌
+
+Info: #f3c300 ✨
+
+Icon left, text right, with close x button
+
+Examples:
+
+✅ Success
+"Transaction completed successfully."
+
+⚠️ Info/Reminder
+"You're eligible for credit access after 12 months of saving."
+
+❌ Error
+"Failed to connect to the bank account. Try again later."
+
+Toast code snippet (example using Tailwind):
+
+html
+Copy
+Edit
+<div class="bg-white border-l-4 border-[#1f9345] text-[#00572d] p-4 rounded shadow flex items-start gap-2">
+  <span>✅</span>
+  <div>
+    <p class="font-bold">Success</p>
+    <p>Transaction completed successfully.</p>
+  </div>
+</div>

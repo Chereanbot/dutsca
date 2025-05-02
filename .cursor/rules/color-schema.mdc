@@ -1,0 +1,19 @@
+---
+description: my website color schema should be 
+globs: 
+alwaysApply: false
+---
+🎨 Main Color Palette (Hex Codes)
+Primary Green: #00572d ✅ (used in headers, navbar, and highlights)
+
+Secondary Green (light): #1f9345 🌿 (used for hover states, buttons, etc.)
+
+Accent Yellow-Gold: #f3c300 ✨ (used for highlights or hover effects)
+
+Text (Primary): #333333 or #000000 🖋️
+
+Background: #ffffff (white) or #f4f4f4 (light gray) 🧼
+
+Footer Dark: #1a1a1a 🖤
+
+

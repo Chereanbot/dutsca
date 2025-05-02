@@ -1,0 +1,268 @@
+/* DUTSCA Teacher Portal Styles */
+
+/* Color Variables */
+:root {
+    --primary-green: #00572d;
+    --secondary-green: #1f9345;
+    --accent-gold: #f3c300;
+    --text-primary: #333333;
+    --text-black: #000000;
+    --bg-white: #ffffff;
+    --bg-light: #f4f4f4;
+    --footer-dark: #1a1a1a;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+}
+
+/* Transitions */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Card Hover Effects */
+.hover-card {
+    background-color: var(--bg-white);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Loading Animation */
+.loading-overlay {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+}
+
+.loading-spinner {
+    border-color: var(--accent-gold);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Toast Notifications */
+.toast {
+    animation: slideIn 0.3s ease-out;
+    max-width: 400px;
+    background-color: var(--bg-white);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.toast-success {
+    border-left-color: var(--secondary-green);
+}
+
+.toast-error {
+    border-left-color: #d93025;
+}
+
+.toast-info {
+    border-left-color: var(--accent-gold);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: var(--primary-green);
+    color: var(--bg-white);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-link {
+    transition: background-color 0.2s ease;
+    color: var(--bg-white);
+}
+
+.sidebar-link:hover {
+    background-color: var(--secondary-green);
+}
+
+.sidebar-link.active {
+    background-color: var(--secondary-green);
+    border-left: 4px solid var(--accent-gold);
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--primary-green);
+    color: var(--bg-white);
+}
+
+.header-button {
+    transition: background-color 0.2s ease;
+}
+
+.header-button:hover {
+    background-color: var(--secondary-green);
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background-color: var(--bg-white);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-card-header {
+    color: var(--primary-green);
+    border-bottom: 2px solid var(--bg-light);
+}
+
+.dashboard-stat {
+    color: var(--text-black);
+}
+
+.dashboard-stat-label {
+    color: var(--text-primary);
+}
+
+/* Form Elements */
+.input-focus-ring:focus {
+    box-shadow: 0 0 0 3px rgba(0, 87, 45, 0.2);
+    border-color: var(--primary-green);
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: var(--bg-white);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-green);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-green);
+    color: var(--bg-white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-green);
+}
+
+.btn-accent {
+    background-color: var(--accent-gold);
+    color: var(--text-black);
+}
+
+.btn-accent:hover {
+    filter: brightness(95%);
+}
+
+/* Progress Bars */
+.progress-bar {
+    height: 0.5rem;
+    background-color: var(--bg-light);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--primary-green);
+    transition: width 0.5s ease;
+}
+
+.progress-bar-fill.accent {
+    background-color: var(--accent-gold);
+}
+
+/* Stats Cards */
+.stats-card {
+    background-color: var(--bg-white);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.stats-card-icon {
+    color: var(--primary-green);
+}
+
+.stats-card:hover .stats-card-icon {
+    color: var(--secondary-green);
+}
+
+/* Notification Badge */
+.notification-badge {
+    background-color: var(--accent-gold);
+    color: var(--text-black);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+    background-color: var(--bg-white);
+    border: 1px solid var(--bg-light);
+    transform-origin: top right;
+    transition: all 0.2s ease-out;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-green);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-green);
+} 

@@ -1,0 +1,174 @@
+/* Root Variables */
+:root {
+    --primary-green: #00572d;
+    --secondary-green: #1f9345;
+    --accent-gold: #f3c300;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --bg-light: #f8f9fa;
+    --border-color: #e5e7eb;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--primary-green);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-button {
+    transition: all 0.2s ease;
+}
+
+.header-button:hover {
+    background-color: var(--secondary-green);
+}
+
+.clock-button {
+    background-color: var(--secondary-green);
+}
+
+.clock-button:hover {
+    opacity: 0.9;
+}
+
+.notification-badge {
+    background-color: var(--accent-gold);
+    color: var(--primary-green);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: white;
+    border-right: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-link {
+    transition: all 0.2s ease;
+}
+
+.sidebar-link:hover {
+    background-color: #f3f4f6;
+}
+
+.sidebar-link.active {
+    background-color: #f3f4f6;
+}
+
+.sidebar-icon {
+    color: var(--primary-green);
+}
+
+/* Dashboard Cards */
+.status-card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tables */
+.dashboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.dashboard-table th {
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-align: left;
+    padding-bottom: 1rem;
+}
+
+.dashboard-table td {
+    padding: 1rem 0;
+    color: var(--text-primary);
+}
+
+.dashboard-table tr:not(:last-child) td {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge-present {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.status-badge-late {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Loading Animation */
+.loading-spinner {
+    border-top-color: var(--primary-green);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+/* Toast Notifications */
+.toast {
+    animation: slideIn 0.3s ease;
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+    animation: fadeIn 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Quick Actions Button */
+.quick-actions-btn {
+    background-color: var(--primary-green);
+    transition: background-color 0.2s ease;
+}
+
+.quick-actions-btn:hover {
+    background-color: var(--secondary-green);
+} 
