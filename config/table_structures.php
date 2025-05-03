@@ -118,13 +118,17 @@ function createTables() {
             // 3. Create Departments Table
             $pdo->exec("
                 CREATE TABLE IF NOT EXISTS departments (
-                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(100) NOT NULL UNIQUE,
                     description TEXT,
-                    head_user_id INT,
+                    head_id INT,
+                    contact_email VARCHAR(255),
+                    contact_phone VARCHAR(50),
+                    location VARCHAR(255),
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                    FOREIGN KEY (head_user_id) REFERENCES users(id) ON DELETE SET NULL
+                    status ENUM('active', 'inactive') DEFAULT 'active',
+                    FOREIGN KEY (head_id) REFERENCES users(id) ON DELETE SET NULL
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
             ");
 
@@ -139,6 +143,18 @@ function createTables() {
                     user_agent TEXT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Add after the user_activity_logs table creation
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS settings (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    name VARCHAR(100) NOT NULL UNIQUE,
+                    value TEXT,
+                    description TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
             ");
 
@@ -253,6 +269,50 @@ function createTables() {
                     'bank_name' => 'United Bank',
                     'bank_branch' => 'Addis Ababa',
                     'membership_number' => 'MEM004',
+                    'membership_date' => '2024-01-01',
+                    'credit_eligible' => true,
+                    'monthly_contribution' => 1000.00,
+                    'email_verified' => true
+                ],
+                // Superadmin (cherinetadmin@gmail.com)
+                [
+                    'username' => 'cherinetadmin',
+                    'password' => $commonPassword,
+                    'email' => 'cherinetadmin@gmail.com',
+                    'role' => 'superadmin',
+                    'status' => 'active',
+                    'name' => 'Cherinet Admin',
+                    'contact_number' => '+251900000001',
+                    'department' => 'Administration',
+                    'employee_id' => 'EMP005',
+                    'position' => 'System Superadmin',
+                    'date_joined' => '2024-01-01',
+                    'account_number' => 'ACC005',
+                    'bank_name' => 'Commercial Bank of Ethiopia',
+                    'bank_branch' => 'Addis Ababa',
+                    'membership_number' => 'MEM005',
+                    'membership_date' => '2024-01-01',
+                    'credit_eligible' => true,
+                    'monthly_contribution' => 1000.00,
+                    'email_verified' => true
+                ],
+                // Finance (cherinetfinance@gmail.com)
+                [
+                    'username' => 'cherinetfinance',
+                    'password' => $commonPassword,
+                    'email' => 'cherinetfinance@gmail.com',
+                    'role' => 'finance',
+                    'status' => 'active',
+                    'name' => 'Cherinet Finance',
+                    'contact_number' => '+251900000002',
+                    'department' => 'Finance',
+                    'employee_id' => 'EMP006',
+                    'position' => 'Finance Officer',
+                    'date_joined' => '2024-01-01',
+                    'account_number' => 'ACC006',
+                    'bank_name' => 'Awash Bank',
+                    'bank_branch' => 'Addis Ababa',
+                    'membership_number' => 'MEM006',
                     'membership_date' => '2024-01-01',
                     'credit_eligible' => true,
                     'monthly_contribution' => 1000.00,
@@ -489,6 +549,145 @@ function createTables() {
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
             ");
 
+            // Create Backup Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS backups (
+                    id VARCHAR(50) PRIMARY KEY,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    size INT NOT NULL,
+                    status ENUM('pending', 'completed', 'failed', 'deleted') DEFAULT 'pending',
+                    description TEXT,
+                    encrypted BOOLEAN DEFAULT FALSE,
+                    compressed BOOLEAN DEFAULT FALSE,
+                    verify_result TEXT,
+                    verify_at TIMESTAMP NULL,
+                    created_by INT,
+                    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Create System Status Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS system_status (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    status_type VARCHAR(100) NOT NULL,
+                    value VARCHAR(255),
+                    description TEXT,
+                    checked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    checked_by INT,
+                    FOREIGN KEY (checked_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Create Performance Monitoring Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS performance_monitoring (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    metric VARCHAR(100) NOT NULL,
+                    value VARCHAR(100) NOT NULL,
+                    unit VARCHAR(20),
+                    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    recorded_by INT,
+                    notes TEXT,
+                    FOREIGN KEY (recorded_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Create System Update Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS system_updates (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    version VARCHAR(20) NOT NULL,
+                    update_type ENUM('security', 'feature', 'bugfix', 'maintenance') NOT NULL,
+                    description TEXT,
+                    status ENUM('pending', 'applied', 'failed', 'rolled_back') DEFAULT 'pending',
+                    applied_at TIMESTAMP NULL,
+                    applied_by INT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (applied_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Enhance Security Setting Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS security_settings (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    setting_key VARCHAR(100) UNIQUE NOT NULL,
+                    setting_value TEXT NOT NULL,
+                    description TEXT,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    updated_by INT,
+                    FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Insert default security settings
+            $stmt = $pdo->prepare("
+                INSERT IGNORE INTO security_settings (setting_key, setting_value, description)
+                VALUES (?, ?, ?)
+            ");
+            $defaultSecuritySettings = [
+                ['password_min_length', '8', 'Minimum password length'],
+                ['password_require_special', 'true', 'Require special characters in password'],
+                ['password_require_uppercase', 'true', 'Require uppercase letters in password'],
+                ['password_require_number', 'true', 'Require numbers in password'],
+                ['session_timeout_minutes', '30', 'Session timeout in minutes'],
+                ['require_2fa', 'false', 'Require two-factor authentication for all users'],
+                ['max_login_attempts', '5', 'Maximum allowed failed login attempts before lockout'],
+                ['account_lockout_duration_minutes', '15', 'Duration (in minutes) for which account is locked after max failed attempts'],
+                ['password_expiry_days', '90', 'Number of days before password must be changed'],
+                ['allow_password_reuse', 'false', 'Allow users to reuse previous passwords']
+            ];
+            foreach ($defaultSecuritySettings as $setting) {
+                $stmt->execute($setting);
+            }
+
+            // Create System Report Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS system_reports (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    report_type VARCHAR(100) NOT NULL,
+                    file_path VARCHAR(255) NOT NULL,
+                    generated_by INT,
+                    generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    status ENUM('pending', 'completed', 'failed') DEFAULT 'completed',
+                    notes TEXT,
+                    FOREIGN KEY (generated_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Create User Report Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS user_reports (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    user_id INT NOT NULL,
+                    report_type VARCHAR(100) NOT NULL,
+                    file_path VARCHAR(255) NOT NULL,
+                    generated_by INT,
+                    generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    status ENUM('pending', 'completed', 'failed') DEFAULT 'completed',
+                    notes TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                    FOREIGN KEY (generated_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Insert default settings
+            $stmt = $pdo->prepare("
+                INSERT INTO settings (name, value, description) VALUES 
+                ('backup_config', ?, 'Backup system configuration'),
+                ('system_version', '1.0.0', 'Current system version')
+            ");
+
+            $backupConfig = json_encode([
+                'frequency' => 'daily',
+                'retention' => 30,
+                'compression' => 'gzip',
+                'encryption' => true
+            ]);
+
+            $stmt->execute([$backupConfig]);
+
             // Commit the transaction
             $pdo->commit();
 
@@ -507,6 +706,159 @@ function createTables() {
             echo "<li>Password: admin123</li>";
             echo "</ul>";
             echo "</div>";
+
+            // Create Permission Categories Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS permission_categories (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    name VARCHAR(100) NOT NULL UNIQUE,
+                    description TEXT,
+                    icon VARCHAR(50),
+                    display_order INT DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Create Permissions Table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS permissions (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    name VARCHAR(100) NOT NULL UNIQUE,
+                    display_name VARCHAR(100) NOT NULL,
+                    description TEXT,
+                    category_id INT,
+                    icon VARCHAR(50),
+                    is_active BOOLEAN DEFAULT TRUE,
+                    requires_approval BOOLEAN DEFAULT FALSE,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    FOREIGN KEY (category_id) REFERENCES permission_categories(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Drop and recreate User Permissions Table with reference to permissions table
+            $pdo->exec("DROP TABLE IF EXISTS user_permissions");
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS user_permissions (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    user_id INT NOT NULL,
+                    permission_id INT NOT NULL,
+                    granted_by INT,
+                    status ENUM('pending', 'active', 'revoked') DEFAULT 'active',
+                    granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    expires_at TIMESTAMP NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                    FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE,
+                    FOREIGN KEY (granted_by) REFERENCES users(id) ON DELETE SET NULL,
+                    UNIQUE KEY unique_user_permission (user_id, permission_id)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            ");
+
+            // Insert default permission categories
+            $pdo->exec("
+                INSERT INTO permission_categories (name, description, icon, display_order) VALUES
+                ('User Management', 'Permissions related to user management', 'fa-users', 1),
+                ('Department Management', 'Permissions related to department management', 'fa-building', 2),
+                ('Finance', 'Permissions related to financial operations', 'fa-money-bill', 3),
+                ('Reports', 'Permissions related to reports and analytics', 'fa-chart-bar', 4),
+                ('System', 'System-level permissions', 'fa-cogs', 5)
+            ");
+
+            // Insert default permissions
+            $pdo->exec("
+                INSERT INTO permissions (name, display_name, description, category_id, icon) VALUES
+                ('manage_users', 'Manage Users', 'Create, edit, and delete user accounts', 1, 'fa-user-cog'),
+                ('view_users', 'View Users', 'View user list and details', 1, 'fa-users'),
+                ('manage_departments', 'Manage Departments', 'Create, edit, and delete departments', 2, 'fa-building'),
+                ('view_departments', 'View Departments', 'View department list and details', 2, 'fa-building'),
+                ('manage_finances', 'Manage Finances', 'Handle financial transactions', 3, 'fa-money-check'),
+                ('view_finances', 'View Finances', 'View financial records', 3, 'fa-money-bill'),
+                ('generate_reports', 'Generate Reports', 'Generate system reports', 4, 'fa-file-alt'),
+                ('view_reports', 'View Reports', 'View system reports', 4, 'fa-chart-line'),
+                ('manage_settings', 'Manage Settings', 'Modify system settings', 5, 'fa-cogs'),
+                ('manage_permissions', 'Manage Permissions', 'Create and assign permissions', 5, 'fa-key'),
+                ('manage_backups', 'Manage Backups', 'Create and restore system backups', 5, 'fa-database')
+            ");
+
+            // Grant all permissions to superadmin
+            $pdo->exec("
+                INSERT INTO user_permissions (user_id, permission_id, granted_by, status)
+                SELECT 1, id, 1, 'active'
+                FROM permissions
+            ");
+
+            // Create security_logs table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS security_logs (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    user_id INT,
+                    action VARCHAR(50) NOT NULL,
+                    description TEXT,
+                    ip_address VARCHAR(45),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            ");
+
+            // Create blocked_ips table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS blocked_ips (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    ip_address VARCHAR(45) NOT NULL,
+                    reason TEXT,
+                    blocked_by INT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (blocked_by) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            ");
+
+            // Create login_attempts table
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS login_attempts (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    user_id INT,
+                    username VARCHAR(255) NOT NULL,
+                    ip_address VARCHAR(45) NOT NULL,
+                    user_agent TEXT,
+                    success BOOLEAN DEFAULT FALSE,
+                    attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            ");
+
+            // Insert default settings
+            $stmt = $pdo->prepare("
+                INSERT IGNORE INTO settings (name, value, description) VALUES
+                ('min_password_length', '8', 'Minimum password length'),
+                ('require_special_chars', '1', 'Require special characters in password'),
+                ('require_numbers', '1', 'Require numbers in password'),
+                ('require_uppercase', '1', 'Require uppercase letters in password'),
+                ('password_expiry_days', '90', 'Password expiry in days'),
+                ('max_login_attempts', '5', 'Maximum login attempts before lockout'),
+                ('lockout_duration_minutes', '30', 'Account lockout duration in minutes'),
+                ('session_timeout_minutes', '30', 'Session timeout in minutes'),
+                ('require_2fa', '0', 'Require two-factor authentication'),
+                ('ip_whitelist', '', 'Whitelisted IP addresses')
+            ");
+
+            $stmt->execute();
+
+            // Create department_members table for tracking department members
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS department_members (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    department_id INT NOT NULL,
+                    user_id INT NOT NULL,
+                    role VARCHAR(50) DEFAULT 'member',
+                    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE,
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                    UNIQUE KEY unique_member (department_id, user_id)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            ");
 
         } catch (Exception $e) {
             if ($pdo->inTransaction()) {

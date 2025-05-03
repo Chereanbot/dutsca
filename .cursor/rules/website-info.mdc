@@ -1,7 +1,7 @@
 ---
 description: about my worksopace detail info
-globs: 
-alwaysApply: false
+globs: yes
+alwaysApply: true
 ---
  Superadmin Activities
 Create & manage all system actors (chairman, manager, financial head, banks)

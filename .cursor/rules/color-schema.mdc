@@ -1,7 +1,7 @@
 ---
 description: my website color schema should be 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 🎨 Main Color Palette (Hex Codes)
 Primary Green: #00572d ✅ (used in headers, navbar, and highlights)

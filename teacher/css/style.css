@@ -18,10 +18,18 @@ body {
 /* Header Styles */
 .header {
     background-color: var(--primary-green);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 64px;
+}
+
+.header-logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
 }
 
 .header-button {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
     transition: all 0.2s ease;
 }
 
@@ -31,6 +39,10 @@ body {
 
 .clock-button {
     background-color: var(--secondary-green);
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    color: white;
+    font-weight: 500;
 }
 
 .clock-button:hover {
@@ -40,83 +52,186 @@ body {
 .notification-badge {
     background-color: var(--accent-gold);
     color: var(--primary-green);
+    font-weight: 600;
 }
 
 /* Sidebar Styles */
 .sidebar {
-    background-color: white;
-    border-right: 1px solid var(--border-color);
-    transition: transform 0.3s ease;
+    background-color: var(--primary-green);
+    width: 240px;
+    padding-top: 1rem;
+}
+
+.sidebar-section {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+}
+
+.sidebar-section-title {
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: white;
+    border-radius: 0.375rem;
     transition: all 0.2s ease;
+    margin-bottom: 0.25rem;
 }
 
 .sidebar-link:hover {
-    background-color: #f3f4f6;
+    background-color: var(--secondary-green);
 }
 
 .sidebar-link.active {
-    background-color: #f3f4f6;
+    background-color: var(--secondary-green);
 }
 
 .sidebar-icon {
-    color: var(--primary-green);
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem;
 }
 
 /* Dashboard Cards */
 .status-card {
     background-color: white;
-    border-radius: 1rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
 }
 
-.status-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.status-card-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-card-icon.blue {
+    background-color: #e0f2fe;
+    color: #0284c7;
+}
+
+.status-card-icon.green {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.status-card-icon.yellow {
+    background-color: #fef9c3;
+    color: #ca8a04;
+}
+
+.status-card-icon.purple {
+    background-color: #f3e8ff;
+    color: #9333ea;
 }
 
 /* Tables */
-.dashboard-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+.table-container {
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
 
-.dashboard-table th {
-    color: var(--text-secondary);
+.table-header {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 1rem;
+}
+
+.table-header th {
     font-weight: 500;
     text-align: left;
-    padding-bottom: 1rem;
+}
+
+.dashboard-table {
+    width: 100%;
 }
 
 .dashboard-table td {
-    padding: 1rem 0;
-    color: var(--text-primary);
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.dashboard-table tr:not(:last-child) td {
-    border-bottom: 1px solid var(--border-color);
+.dashboard-table tr:last-child td {
+    border-bottom: none;
 }
 
 /* Status Badges */
 .status-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
 }
 
 .status-badge-present {
-    background-color: #dcfce7;
-    color: #15803d;
+    background-color: var(--secondary-green);
+    color: white;
 }
 
 .status-badge-late {
-    background-color: #fef9c3;
-    color: #854d0e;
+    background-color: var(--accent-gold);
+    color: var(--primary-green);
+}
+
+/* Quick Actions Button */
+.quick-actions-btn {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-actions-btn:hover {
+    background-color: var(--secondary-green);
+}
+
+/* Welcome Section */
+.welcome-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.welcome-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.welcome-subtext {
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* View All Link */
+.view-all-link {
+    color: var(--primary-green);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.view-all-link:hover {
+    color: var(--secondary-green);
 }
 
 /* Animations */
@@ -161,14 +276,4 @@ body {
 .dropdown-menu {
     animation: fadeIn 0.2s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Quick Actions Button */
-.quick-actions-btn {
-    background-color: var(--primary-green);
-    transition: background-color 0.2s ease;
-}
-
-.quick-actions-btn:hover {
-    background-color: var(--secondary-green);
 } 

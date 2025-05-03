@@ -122,83 +122,83 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <div class="sidebar-menu">
         <div class="nav-section">Main Menu</div>
         <div class="nav-item">
-            <a href="/dutsca/finance/dashboard.php" class="nav-link <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/dashboard.php" class="nav-link <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/savings.php" class="nav-link <?php echo $currentPage === 'savings.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/users.php" class="nav-link <?php echo $currentPage === 'users.php' ? 'active' : ''; ?>">
                 <i class="fas fa-users"></i>
-                <span>Savings</span>
+                <span>User Management</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/loans.php" class="nav-link <?php echo $currentPage === 'loans.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/departments.php" class="nav-link <?php echo $currentPage === 'departments.php' ? 'active' : ''; ?>">
                 <i class="fas fa-building"></i>
-                <span>Loans</span>
+                <span>Departments</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/transactions.php" class="nav-link <?php echo $currentPage === 'transactions.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/user_permissions.php" class="nav-link <?php echo $currentPage === 'user_permissions.php' ? 'active' : ''; ?>">
                 <i class="fas fa-user-shield"></i>
-                <span>Transactions</span>
+                <span>User Permissions</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/users.php" class="nav-link <?php echo $currentPage === 'users.php' ? 'active' : ''; ?>">
-                <i class="fas fa-users"></i>
-                <span>Users</span>
+            <a href="/dutsca/superadmin/security.php" class="nav-link <?php echo $currentPage === 'security.php' ? 'active' : ''; ?>">
+                <i class="fas fa-shield-alt"></i>
+                <span>Security</span>
             </a>
         </div>
 
-        <div class="nav-section">Reports</div>
+        <div class="nav-section">System</div>
         <div class="nav-item">
-            <a href="/dutsca/finance/reports.php" class="nav-link <?php echo $currentPage === 'reports.php' ? 'active' : ''; ?>">
-                <i class="fas fa-file-alt"></i>
-                <span>Reports</span>
+            <a href="/dutsca/superadmin/updates.php" class="nav-link <?php echo $currentPage === 'updates.php' ? 'active' : ''; ?>">
+                <i class="fas fa-sync-alt"></i>
+                <span>Updates</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/status.php" class="nav-link <?php echo $currentPage === 'status.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/status.php" class="nav-link <?php echo $currentPage === 'status.php' ? 'active' : ''; ?>">
                 <i class="fas fa-database"></i>
                 <span>System Status</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/logs.php" class="nav-link <?php echo $currentPage === 'logs.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/logs.php" class="nav-link <?php echo $currentPage === 'logs.php' ? 'active' : ''; ?>">
                 <i class="fas fa-history"></i>
                 <span>System Logs</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/backup.php" class="nav-link <?php echo $currentPage === 'backup.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/backup.php" class="nav-link <?php echo $currentPage === 'backup.php' ? 'active' : ''; ?>">
                 <i class="fas fa-database"></i>
                 <span>Backup & Recovery</span>
             </a>
         </div>
         <div class="nav-section">Reports</div>
         <div class="nav-item">
-            <a href="/dutsca/finance/activity_reports.php" class="nav-link <?php echo $currentPage === 'activity_reports.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/activity_reports.php" class="nav-link <?php echo $currentPage === 'activity_reports.php' ? 'active' : ''; ?>">
                 <i class="fas fa-file-alt"></i>
                 <span>User Activities</span>
             </a>
         </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/system_reports.php" class="nav-link <?php echo $currentPage === 'system_reports.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/system_reports.php" class="nav-link <?php echo $currentPage === 'system_reports.php' ? 'active' : ''; ?>">
                 <i class="fas fa-file-alt"></i>
                 <span>System Reports</span>
             </a>
         </div>
         <div class="nav-section">Settings</div>
         <div class="nav-item">
-            <a href="/dutsca/finance/settings.php" class="nav-link <?php echo $currentPage === 'settings.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/settings.php" class="nav-link <?php echo $currentPage === 'settings.php' ? 'active' : ''; ?>">
                 <i class="fas fa-cog"></i>
                 <span>System Settings</span>
             </a>
             </div>
         <div class="nav-item">
-            <a href="/dutsca/finance/profile.php" class="nav-link <?php echo $currentPage === 'profile.php' ? 'active' : ''; ?>">
+            <a href="/dutsca/superadmin/profile.php" class="nav-link <?php echo $currentPage === 'profile.php' ? 'active' : ''; ?>">
                 <i class="fas fa-user-circle"></i>
                 <span>My Profile</span>
                 </a>

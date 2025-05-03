@@ -67,17 +67,15 @@ require_once 'include/sidebar.php';
 <main class="ml-0 md:ml-64 pt-16 min-h-screen bg-gray-50">
     <div class="p-6">
         <!-- Welcome Section -->
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <div class="flex items-center space-x-4">
-                    <img src="/assets/images/default-avatar.png" alt="Profile" class="w-12 h-12 rounded-full">
-                    <div>
-                        <h1 class="text-2xl font-bold text-gray-800">Welcome back, <?php echo htmlspecialchars($userName); ?>!</h1>
-                        <p class="text-gray-500">cherinet</p>
-                    </div>
+        <div class="welcome-section">
+            <div class="flex items-center space-x-4">
+                <img src="/assets/images/default-avatar.png" alt="Profile" class="w-12 h-12 rounded-full">
+                <div>
+                    <h1 class="welcome-text">Welcome back, <?php echo htmlspecialchars($userName); ?>!</h1>
+                    <p class="welcome-subtext">cherinet</p>
                 </div>
             </div>
-            <button class="bg-[#00572d] text-white px-6 py-2 rounded-lg hover:bg-[#1f9345] transition-colors flex items-center space-x-2">
+            <button class="quick-actions-btn">
                 <i class="fas fa-bolt"></i>
                 <span>Quick Actions</span>
             </button>
@@ -86,10 +84,10 @@ require_once 'include/sidebar.php';
         <!-- Status Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <!-- Today's Status -->
-            <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="status-card">
                 <div class="flex items-center space-x-4">
-                    <div class="bg-blue-100 p-3 rounded-lg">
-                        <i class="fas fa-check text-blue-600"></i>
+                    <div class="status-card-icon blue">
+                        <i class="fas fa-check"></i>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Today's Status</p>
@@ -99,10 +97,10 @@ require_once 'include/sidebar.php';
             </div>
 
             <!-- This Week -->
-            <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="status-card">
                 <div class="flex items-center space-x-4">
-                    <div class="bg-green-100 p-3 rounded-lg">
-                        <i class="fas fa-calendar text-green-600"></i>
+                    <div class="status-card-icon green">
+                        <i class="fas fa-calendar"></i>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">This Week</p>
@@ -112,10 +110,10 @@ require_once 'include/sidebar.php';
             </div>
 
             <!-- Next Shift -->
-            <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="status-card">
                 <div class="flex items-center space-x-4">
-                    <div class="bg-yellow-100 p-3 rounded-lg">
-                        <i class="fas fa-clock text-yellow-600"></i>
+                    <div class="status-card-icon yellow">
+                        <i class="fas fa-clock"></i>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Next Shift</p>
@@ -125,10 +123,10 @@ require_once 'include/sidebar.php';
             </div>
 
             <!-- Leave Balance -->
-            <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="status-card">
                 <div class="flex items-center space-x-4">
-                    <div class="bg-purple-100 p-3 rounded-lg">
-                        <i class="fas fa-calendar-alt text-purple-600"></i>
+                    <div class="status-card-icon purple">
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Leave Balance</p>
@@ -141,35 +139,33 @@ require_once 'include/sidebar.php';
         <!-- Schedule & Attendance Section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <!-- Upcoming Schedule -->
-            <div class="bg-white rounded-xl shadow-sm">
-                <div class="p-6 border-b border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-800">Upcoming Schedule</h2>
-                        <a href="#" class="text-[#00572d] hover:text-[#1f9345] text-sm">View All</a>
-                    </div>
+            <div class="table-container">
+                <div class="flex items-center justify-between p-6 border-b border-gray-100">
+                    <h2 class="text-lg font-semibold text-gray-800">Upcoming Schedule</h2>
+                    <a href="#" class="view-all-link">View All</a>
                 </div>
-                <div class="p-6">
-                    <table class="w-full">
+                <div class="p-0">
+                    <table class="dashboard-table">
                         <thead>
-                            <tr class="text-left text-gray-500">
-                                <th class="pb-4">Date</th>
-                                <th class="pb-4">Shift</th>
-                                <th class="pb-4">Time</th>
-                                <th class="pb-4">Location</th>
+                            <tr class="table-header">
+                                <th>Date</th>
+                                <th>Shift</th>
+                                <th>Time</th>
+                                <th>Location</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-600">
-                            <tr class="border-b border-gray-100">
-                                <td class="py-4">Jan 16, 2024</td>
-                                <td class="py-4">Morning Shift</td>
-                                <td class="py-4">8:00 AM - 4:00 PM</td>
-                                <td class="py-4">Main Campus</td>
+                        <tbody>
+                            <tr>
+                                <td>Jan 16, 2024</td>
+                                <td>Morning Shift</td>
+                                <td>8:00 AM - 4:00 PM</td>
+                                <td>Main Campus</td>
                             </tr>
                             <tr>
-                                <td class="py-4">Jan 17, 2024</td>
-                                <td class="py-4">Afternoon Shift</td>
-                                <td class="py-4">2:00 PM - 10:00 PM</td>
-                                <td class="py-4">Library</td>
+                                <td>Jan 17, 2024</td>
+                                <td>Afternoon Shift</td>
+                                <td>2:00 PM - 10:00 PM</td>
+                                <td>Library</td>
                             </tr>
                         </tbody>
                     </table>
@@ -177,38 +173,36 @@ require_once 'include/sidebar.php';
             </div>
 
             <!-- Recent Attendance -->
-            <div class="bg-white rounded-xl shadow-sm">
-                <div class="p-6 border-b border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-800">Recent Attendance</h2>
-                        <a href="#" class="text-[#00572d] hover:text-[#1f9345] text-sm">View All</a>
-                    </div>
+            <div class="table-container">
+                <div class="flex items-center justify-between p-6 border-b border-gray-100">
+                    <h2 class="text-lg font-semibold text-gray-800">Recent Attendance</h2>
+                    <a href="#" class="view-all-link">View All</a>
                 </div>
-                <div class="p-6">
-                    <table class="w-full">
+                <div class="p-0">
+                    <table class="dashboard-table">
                         <thead>
-                            <tr class="text-left text-gray-500">
-                                <th class="pb-4">Date</th>
-                                <th class="pb-4">Clock In</th>
-                                <th class="pb-4">Clock Out</th>
-                                <th class="pb-4">Status</th>
+                            <tr class="table-header">
+                                <th>Date</th>
+                                <th>Clock In</th>
+                                <th>Clock Out</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-600">
-                            <tr class="border-b border-gray-100">
-                                <td class="py-4">Jan 15, 2024</td>
-                                <td class="py-4">8:00 AM</td>
-                                <td class="py-4">4:00 PM</td>
-                                <td class="py-4">
-                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Present</span>
+                        <tbody>
+                            <tr>
+                                <td>Jan 15, 2024</td>
+                                <td>8:00 AM</td>
+                                <td>4:00 PM</td>
+                                <td>
+                                    <span class="status-badge status-badge-present">Present</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="py-4">Jan 14, 2024</td>
-                                <td class="py-4">8:15 AM</td>
-                                <td class="py-4">4:00 PM</td>
-                                <td class="py-4">
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">Late</span>
+                                <td>Jan 14, 2024</td>
+                                <td>8:15 AM</td>
+                                <td>4:00 PM</td>
+                                <td>
+                                    <span class="status-badge status-badge-late">Late</span>
                                 </td>
                             </tr>
                         </tbody>

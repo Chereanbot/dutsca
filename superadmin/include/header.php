@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Check if user is logged in and is superadmin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'finance') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'superadmin') {
     header('Location: /dutsca/index.php');
     exit();
 }
@@ -15,8 +15,8 @@ require_once('../config/database.php');
 $db = getDB();
 
 // Get user data from session
-$userRole = $_SESSION['role'] ?? 'finance';
-$userName = $_SESSION['name'] ?? 'Finance Head';
+$userRole = $_SESSION['role'] ?? 'superadmin';
+$userName = $_SESSION['name'] ?? 'System Admin';
 $userId = $_SESSION['user_id'] ?? null;
 
 // Get user profile image

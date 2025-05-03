@@ -43,47 +43,42 @@ $menuItems = [
 ];
 ?>
 
-<aside class="fixed left-0 top-0 z-40 h-screen pt-16 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 w-64" id="teacherSidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto">
-        <div class="space-y-2 font-medium text-white">
-            <!-- User Profile Section -->
-            <div class="flex items-center p-2 mb-6">
-                <img src="/assets/images/default-avatar.png" alt="Profile" class="w-10 h-10 rounded-full mr-3">
-                <div>
-                    <p class="text-sm font-semibold"><?php echo htmlspecialchars($userName); ?></p>
-                    <p class="text-xs opacity-75"><?php echo ucfirst($userRole); ?></p>
-                </div>
-            </div>
-
-            <!-- Navigation Menu -->
-            <nav class="space-y-1 mt-4">
+<aside class="sidebar fixed left-0 top-0 z-40 h-screen pt-16 transition-transform -translate-x-full md:translate-x-0" id="teacherSidebar">
+    <div class="h-full overflow-y-auto">
+        <!-- Main Menu Section -->
+        <div class="sidebar-section">
+            <h3 class="sidebar-section-title">MAIN MENU</h3>
+            <nav>
                 <?php foreach ($menuItems as $item): ?>
                     <a href="<?php echo $item['url']; ?>" 
-                       class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors <?php echo basename($item['url']) === $currentPage ? 'bg-gray-100' : ''; ?>">
-                        <i class="<?php echo $item['icon']; ?> w-5 h-5 text-[#00572d]"></i>
-                        <span class="ml-3"><?php echo $item['text']; ?></span>
+                       class="sidebar-link <?php echo basename($item['url']) === $currentPage ? 'active' : ''; ?>">
+                        <i class="<?php echo $item['icon']; ?> sidebar-icon"></i>
+                        <span><?php echo $item['text']; ?></span>
                     </a>
                 <?php endforeach; ?>
             </nav>
+        </div>
 
-            <!-- Quick Actions -->
-            <div class="mt-8">
-                <h3 class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Quick Actions</h3>
-                <div class="mt-4 space-y-1">
-                    <a href="/teacher/clock.php" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-clock w-5 h-5 text-[#00572d]"></i>
-                        <span class="ml-3">Clock In/Out</span>
-                    </a>
-                    <a href="/teacher/request-leave.php" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-calendar-plus w-5 h-5 text-[#00572d]"></i>
-                        <span class="ml-3">Request Leave</span>
-                    </a>
-                    <a href="/teacher/report-issue.php" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-exclamation-circle w-5 h-5 text-[#00572d]"></i>
-                        <span class="ml-3">Report Issue</span>
-                    </a>
-                </div>
-            </div>
+        <!-- Quick Actions Section -->
+        <div class="sidebar-section">
+            <h3 class="sidebar-section-title">QUICK ACTIONS</h3>
+            <nav>
+                <a href="/teacher/clock.php" 
+                   class="sidebar-link <?php echo $currentPage === 'clock.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-clock sidebar-icon"></i>
+                    <span>Clock In/Out</span>
+                </a>
+                <a href="/teacher/request-leave.php" 
+                   class="sidebar-link <?php echo $currentPage === 'request-leave.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-calendar-plus sidebar-icon"></i>
+                    <span>Request Leave</span>
+                </a>
+                <a href="/teacher/report-issue.php" 
+                   class="sidebar-link <?php echo $currentPage === 'report-issue.php' ? 'active' : ''; ?>">
+                    <i class="fas fa-exclamation-circle sidebar-icon"></i>
+                    <span>Report Issue</span>
+                </a>
+            </nav>
         </div>
     </div>
 </aside>

@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $redirect = '';
                         switch ($user['role']) {
                             case 'superadmin':
-                                $redirect = 'admin/dashboard.php';
+                                $redirect = 'superadmin/dashboard.php';
                                 break;
                             case 'chairman':
                                 $redirect = 'chairman/dashboard.php';

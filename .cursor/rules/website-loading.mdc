@@ -1,0 +1,17 @@
+---
+description: our website loading you have to use this website loading everywhere
+globs: 
+alwaysApply: false
+---
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Loading">
+  <circle cx="50" cy="50" r="35" stroke="#00572d" stroke-width="8" fill="none" stroke-linecap="round">
+    <animate attributeName="stroke-dashoffset" values="0;502" dur="2s" repeatCount="indefinite" />
+    <animate attributeName="stroke-dasharray" values="150.6 100.4;1 250;150.6 100.4" dur="2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="50" cy="50" r="25" stroke="#f3c300" stroke-width="5" fill="none" stroke-dasharray="39.3 39.3" stroke-linecap="round">
+    <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="50" cy="50" r="15" fill="#1f9345">
+    <animate attributeName="r" values="15;12;15" dur="1.5s" repeatCount="indefinite" />
+  </circle>
+</svg>
